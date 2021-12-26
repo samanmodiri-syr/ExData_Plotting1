@@ -1,0 +1,11 @@
+data <- read.table("household_power_consumption.txt",sep=';',header=TRUE)
+data$dandt <- paste(data$Date,data$Time)
+data$dandt <- strptime(data$dandt,format="%d/%m/%Y %H:%M:%S")
+temp = data[(data$Date=="1/2/2007" | data$Date=="2/2/2007"),]
+names(temp)
+png(file="plot3.png")
+plot(x=temp$dandt,y=as.numeric(temp$Sub_metering_1),type="S",xlab="Day",ylab="Energy Sub Metering",col='Black',main="Energy Sub Metering")
+points(x=temp$dandt,y=as.numeric(temp$Sub_metering_2),type="S",xlab="Day",ylab="Energy Sub Metering",col='Red',main="Energy Sub Metering")
+points(x=temp$dandt,y=as.numeric(temp$Sub_metering_3),type="S",xlab="Day",ylab="Energy Sub Metering",col='Blue',main="Energy Sub Metering")
+legend("topright", pch = "-" , col = c("black","blue", "red"), legend = c("Sub_metering_1", "Sub_metering_2","Sub_metering_3"))
+dev.off()
